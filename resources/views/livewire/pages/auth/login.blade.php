@@ -1,5 +1,5 @@
 <div>
-    <div class="bg-card border border-card-line rounded-xl shadow-2xs">
+  <div class="bg-card border border-card-line rounded-xl shadow-2xs mx-auto mt-30  max-w-4xl">
   <!-- Sign In -->
   <div class="p-4 sm:p-7">
     <div class="text-center">

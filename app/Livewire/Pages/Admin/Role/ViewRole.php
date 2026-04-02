@@ -40,6 +40,11 @@ class ViewRole extends Component
         // this will delete the role from the database
     }
 
+    public function edit($id)
+    {
+        return redirect()->route('admin.edit.role', $id);
+    }
+
     #[Layout('components.layouts.admin')]
     public function render()
     {

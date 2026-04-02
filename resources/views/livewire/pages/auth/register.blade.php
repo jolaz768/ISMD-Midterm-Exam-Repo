@@ -6,6 +6,9 @@
       <h2 class="text-xl text-foreground font-bold sm:text-3xl">
         Sign Up
       </h2>
+      <p class="mt-4 text-sm text-muted-foreground-1">
+        Already have an account? <a href="{{ route('login.page') }}" class="text-primary hover:underline">Log in</a>
+      </p>
     </div>
 
     <!-- Card -->

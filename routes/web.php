@@ -10,12 +10,17 @@ use App\Livewire\Pages\Admin\User\ViewUser;
 use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Pages\Auth\Register;
 use App\Livewire\Pages\Owner\OwnerDashboard;
+use App\Livewire\Pages\Owner\User\CreateUser as CreateUserOwner;
+use App\Livewire\Pages\Owner\User\EditUser as EditUserOwner;
+use App\Livewire\Pages\Owner\User\ViewUser as ViewUserOwner;
+use App\Livewire\Pages\Public\IndexPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', IndexPage::class)->name('home.page');
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', Login::class)->name('login.page');
+    Route::get('/login', Login::class)->name('login.page');
     Route::get('/register', Register::class)->name('register.page');
 });
 
@@ -46,13 +51,14 @@ Route::prefix('admin')
 });
 
 Route::prefix('owner')
-// ->middleware(['auth', 'role:owner'])
+->middleware(['auth', 'role:owner'])
 ->group(function()
 {
     Route::get('/dashboard',OwnerDashboard::class)->name('owner.dashboard');
 
-    Route::get('/create-user',CreateUser::class)->name('owner.create.user');
-    Route::get('/view-user',ViewUser::class)->name('owner.view.user');
-    Route::get('/edit-user/{id}',EditUser::class)->name('owner.edit.user');
+
+    Route::get('/create-user',CreateUserOwner::class)->name('owner.create.user');
+    Route::get('/view-user',ViewUserOwner::class)->name('owner.view.user');
+    Route::get('/edit-user/{id}',EditUserOwner::class)->name('owner.edit.user');
   
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages\Admin\User;
+namespace App\Livewire\Pages\Owner\User;
 
 use App\Models\User;
 use Livewire\Attributes\Computed;
@@ -9,7 +9,8 @@ use Livewire\Component;
 
 class ViewUser extends Component
 {
-     //database fields
+
+
     public $user;
     public $role;
 
@@ -39,10 +40,10 @@ class ViewUser extends Component
         return redirect()->route('admin.edit.user', $id);
     }
 
-    #[Layout('components.layouts.admin')]
-    
+    #[Layout('components.layouts.owner')]
+
     public function render()
     {
-        return view('livewire.pages.admin.user.view-user');
+        return view('livewire.pages.owner.user.view-user');
     }
 }

@@ -6,81 +6,50 @@ use App\Models\User;
 
 class UserPolicy
 {
-    protected function isAdmin(User $user): bool
+    public function before(User $user)
     {
-        return $user->hasRole('admin');
+        if ($user->hasRole('admin')) {
+            return true;
+        }
     }
-
-    protected function isOwner(User $user): bool
-    {
-        return $user->hasRole('owner');
-    }
-
-    protected function isStaff(User $user): bool
-    {
-        return $user->hasRole('staff');
-    }
-
     /**
-     * Determine whether the user can view any users.
+     * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $this->isAdmin($user) || $this->isOwner($user) || $this->isStaff($user);
+        return $user->hasAnyRole(['admin', 'owner']);
     }
 
     /**
-     * Determine whether the user can view a user.
+     * Determine whether the user can view the model.
      */
     public function view(User $user, User $model): bool
     {
-        if ($this->isAdmin($user)) {
-            return true;
-        }
-
-        if ($this->isOwner($user)) {
-            // Owner can view staff users (and self if needed)
-            return $model->hasRole('staff') || $model->id === $user->id;
-        }
-
-        if ($this->isStaff($user)) {
-            // Staff may only view themselves or other staff, no editing rights
-            return $model->hasRole('staff') || $model->id === $user->id;
-        }
-
-        return false;
+        return$user->hasAnyRole(['admin', 'owner']) || $user->id === $model->id;
     }
 
     /**
-     * Determine whether the user can create users.
+     * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        return $this->isAdmin($user) || $this->isOwner($user);
+        return $user->hasRole(['admin', 'owner']);
     }
 
     /**
-     * Determine whether the user can update users.
+     * Determine whether the user can update the model.
      */
     public function update(User $user, User $model): bool
     {
-        if ($this->isAdmin($user)) {
-            return true;
-        }
-
-        return $this->isOwner($user) && $model->hasRole('staff');
+        return $user->hasRole(['admin']);
     }
 
     /**
-     * Determine whether the user can delete users.
+     * Determine whether the user can delete the model.
      */
     public function delete(User $user, User $model): bool
     {
-        if ($this->isAdmin($user)) {
-            return $user->id !== $model->id;
-        }
-
-        return $this->isOwner($user) && $model->hasRole('staff') && $user->id !== $model->id;
+        return $user->hasAnyRole(['admin']);
     }
 
     /**
@@ -88,7 +57,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return $this->isAdmin($user);
+        return false;
     }
 
     /**
@@ -96,7 +65,7 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): bool
     {
-        return $this->isAdmin($user);
+        return false;
     }
 }
 
