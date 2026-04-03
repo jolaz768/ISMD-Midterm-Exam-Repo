@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        Gate::policy(User::class, UserPolicy::class);
     }
 
     /**
@@ -31,7 +32,6 @@ class AppServiceProvider extends ServiceProvider
             return null;
         });
 
-        // Register only one policy for User model and handle all role rules there
-        Gate::policy(User::class, UserPolicy::class);
+       
     }
 }

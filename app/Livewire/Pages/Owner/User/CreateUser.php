@@ -22,7 +22,10 @@ class CreateUser extends Component
     //initialize roles on mount
     public function mount()
     {
-        $roles = Role::select('id', 'name')->get();
+        $roles = Role::select('id', 'name')
+        ->where('name', '!=', 'Admin')
+        ->where('name', '!=', 'Owner')
+        ->get();
         $this->roles = $roles;
     }
 
@@ -87,7 +90,7 @@ class CreateUser extends Component
         //reset form fields after saving
         $this->reset(['name', 'email', 'password', 'password_confirmation', 'selectedRole']);
 
-        return redirect()->route('admin.view.user')->with('success', 'User created successfully.');
+        return redirect()->route('owner.view.user')->with('success', 'User created successfully.');
     }
 
 

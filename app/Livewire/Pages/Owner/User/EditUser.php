@@ -39,7 +39,9 @@ class EditUser extends Component
         $this->selectedRole = $user->roles->pluck('name')->toArray();
 
         //initialize roles
-        $roles = Role::query()->select('id', 'name')->get();
+        $roles = Role::query()->select('id', 'name')
+        ->where('name', '!=', 'Admin')
+        ->where('name', '!=', 'Owner')->get();
         $this->roles = $roles;
     }
 

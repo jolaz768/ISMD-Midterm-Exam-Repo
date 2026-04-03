@@ -25,7 +25,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return$user->hasAnyRole(['admin', 'owner']) || $user->id === $model->id;
+        return$user->hasAnyRole(['admin', 'owner', 'staff']) || $user->id === $model->id;
     }
 
     /**
@@ -34,6 +34,7 @@ class UserPolicy
     public function create(User $user): bool
     {
         return $user->hasRole(['admin', 'owner']);
+        
     }
 
     /**
@@ -41,7 +42,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->hasRole(['admin']);
+        return $user->hasRole(['admin'])|| ($user->hasRole('owner') && !$model->hasRole('admin'));
     }
 
     /**
@@ -49,7 +50,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->hasAnyRole(['admin']);
+        return $user->hasAnyRole(['admin'])|| ($user->hasRole('owner') && !$model->hasRole('admin'));
     }
 
     /**

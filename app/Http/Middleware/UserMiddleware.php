@@ -18,6 +18,10 @@ class UserMiddleware
     {
         $user = Auth::user();
 
+            if (!$user) {
+                return redirect()->route('login.page');
+            }
+
             if (!$user || !$user->hasAnyRole(['admin', 'owner', 'staff'])) {
                 abort(403, 'Unauthorized');
             }

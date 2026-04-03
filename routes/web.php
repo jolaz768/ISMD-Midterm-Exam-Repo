@@ -34,7 +34,7 @@ Route::post('/logout', function () {
 })->name('logout')->middleware('auth');
 
 Route::prefix('admin')
-// ->middleware(['auth', 'role:admin'])
+->middleware(['auth', 'role:admin'])
 ->group(function()
 {
     Route::get('/dashboard',AdminDashboard::class)->name('admin.dashboard');

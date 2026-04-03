@@ -23,6 +23,9 @@ class ViewUser extends Component
         return User::query()
         ->select('id','name','email','created_at')
         ->with('roles:id,name')
+        ->whereHas('roles', function ($query) {
+            $query->where('name', '!=', 'Admin');
+        })
         ->orderBy('created_at', 'desc')
         ->get();
         // this should show all the users with their roles in the view
@@ -35,10 +38,10 @@ class ViewUser extends Component
         // this will delete the user from the database
     }
 
-    public function edit($id)
-    {
-        return redirect()->route('admin.edit.user', $id);
-    }
+    // public function edit($id)
+    // {
+    //     return redirect()->route('admin.edit.user', $id);
+    // }
 
     #[Layout('components.layouts.owner')]
 
