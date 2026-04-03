@@ -51,7 +51,7 @@ Route::prefix('admin')
 });
 
 Route::prefix('owner')
-->middleware(['auth', 'role:owner'])
+->middleware(['auth', 'role:owner|staff'])
 ->group(function()
 {
     Route::get('/dashboard',OwnerDashboard::class)->name('owner.dashboard');
@@ -62,3 +62,17 @@ Route::prefix('owner')
     Route::get('/edit-user/{id}',EditUserOwner::class)->name('owner.edit.user');
   
 });
+
+Route::prefix('staff')
+->middleware(['auth', 'role:staff'])
+->group(function()
+{
+    Route::get('/dashboard',OwnerDashboard::class)->name('owner.dashboard');
+
+
+    Route::get('/create-user',CreateUserOwner::class)->name('owner.create.user');
+    Route::get('/view-user',ViewUserOwner::class)->name('owner.view.user');
+    Route::get('/edit-user/{id}',EditUserOwner::class)->name('owner.edit.user');
+  
+});
+

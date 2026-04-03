@@ -3,21 +3,24 @@
 namespace App\Policies;
 
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
-    public function before(User $user)
+    public function before(User $user): ?bool
     {
         if ($user->hasRole('admin')) {
-            return true;
+            return true; // Admin can do everything
         }
+
+        return null; // Defer to other methods for non-admin users
     }
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyRole(['admin', 'owner']);
+        return $user->hasAnyRole(['owner', 'staff']); // Check if user has permission to view users
     }
 
     /**
@@ -25,7 +28,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return$user->hasAnyRole(['admin', 'owner', 'staff']) || $user->id === $model->id;
+        return $user->hasAnyRole(['owner', 'staff']); // Allow users to view their own profile
     }
 
     /**
@@ -33,8 +36,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['admin', 'owner']);
-        
+        return $user->hasAnyRole(['owner']); // Allow users with specific roles to create models
     }
 
     /**
@@ -42,7 +44,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->hasRole(['admin'])|| ($user->hasRole('owner') && !$model->hasRole('admin'));
+        return $user->hasAnyRole(['owner']) ; // Allow users to edit their own profile
     }
 
     /**
@@ -50,7 +52,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->hasAnyRole(['admin'])|| ($user->hasRole('owner') && !$model->hasRole('admin'));
+        return $user->hasAnyRole(['owner']) ; // Allow users to delete other users but not themselves
     }
 
     /**
@@ -58,7 +60,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return false;
+        return $user->hasAnyRole(['owner', 'staff']); // Allow users to restore their own profile
     }
 
     /**
@@ -66,7 +68,6 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): bool
     {
-        return false;
+        return $user->hasAnyRole(['owner', 'staff']); // Allow users to permanently delete their own profile
     }
 }
-

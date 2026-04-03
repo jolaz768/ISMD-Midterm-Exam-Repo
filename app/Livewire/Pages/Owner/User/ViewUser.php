@@ -40,7 +40,7 @@ class ViewUser extends Component
 
     // public function edit($id)
     // {
-    //     return redirect()->route('admin.edit.user', $id);
+    //     return redirect()->route('owner.edit.user', $id);
     // }
 
     #[Layout('components.layouts.owner')]

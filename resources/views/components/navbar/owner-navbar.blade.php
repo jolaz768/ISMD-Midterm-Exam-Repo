@@ -361,22 +361,22 @@
                                         Settings
                                     </a>
                                     @auth
-                                        <!-- Show when logged in -->
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <button
-                                                class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus">
-                                                <svg class="shrink-0 mt-0.5 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path d="m16 17 5-5-5-5" />
-                                                    <path d="M21 12H9" />
-                                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                                                </svg>
-                                                Log out
-                                            </button>
-                                        </form>
+                                    <!-- Show when logged in -->
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button
+                                            class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus">
+                                            <svg class="shrink-0 mt-0.5 size-4" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="m16 17 5-5-5-5" />
+                                                <path d="M21 12H9" />
+                                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                            </svg>
+                                            Log out
+                                        </button>
+                                    </form>
                                     @endauth
                                 </div>
                             </div>
@@ -474,24 +474,27 @@ lg:block lg:-translate-x-full lg:end-auto lg:bottom-0" role="dialog" tabindex="-
                 <!-- List -->
                 <ul class="flex flex-col gap-y-1">
                     <li>
+
                         <a class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-sidebar-2-nav-foreground rounded-lg hover:bg-sidebar-2-nav-hover focus:outline-hidden focus:bg-sidebar-2-nav-focus "
                             href="{{ route('owner.view.user') }}">
                             View Users
                         </a>
+
+
                     </li>
-                    
+
                 </ul>
                 <!-- End List -->
             </div>
 
             <div
                 class="pt-3 mt-3 flex flex-col border-t border-sidebar-2-divider first:border-t-0 first:pt-0 first:mt-0">
-                
+
 
                 <!-- List -->
                 <ul class="flex flex-col gap-y-1">
-                    
-                    
+
+
                 </ul>
                 <!-- End List -->
             </div>

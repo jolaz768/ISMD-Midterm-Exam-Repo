@@ -26,8 +26,6 @@ class UserMiddleware
                 abort(403, 'Unauthorized');
             }
 
-            
-
         return $next($request);
     }
 }

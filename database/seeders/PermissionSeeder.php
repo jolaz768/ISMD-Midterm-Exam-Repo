@@ -9,11 +9,18 @@ use Spatie\Permission\Models\Permission;
 class PermissionSeeder extends Seeder
 {
     protected array $defaultPermissions = [
-        'can-create',
-        'can-view',
-        'can-update',
-        'can-delete',
-        'can-view-any',
+        'can view users',
+        'can create users',
+        'can edit users',
+        'can delete users',
+        'can view roles',
+        'can create roles',
+        'can edit roles',
+        'can delete roles',
+        'can view permissions',
+        'can create permissions',
+        'can edit permissions',
+        'can delete permissions',
 
     ];
     /**

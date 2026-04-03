@@ -27,7 +27,8 @@
                                         View all
                                     </a>
 
-                                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                                    @can('create', App\Models\User::class)
+                                       <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                                         href="{{ route('owner.create.user') }}">
                                         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -36,7 +37,9 @@
                                             <path d="M12 5v14" />
                                         </svg>
                                         Add User
-                                    </a>
+                                    </a> 
+                                    @endcan
+                                    
 
 
                                 </div>
@@ -128,19 +131,19 @@
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-end">
-
-                                                <a wire:click.stop="delete({{ $user->id }})" href="#"
-                                                    class="text-red-600 hover:text-red-700 focus:outline-hidden focus:text-red-700 disabled:opacity-50 disabled:pointer-events-none">
-                                                    Delete
-                                                </a>
-
-
-
-                                                <a wire:click.stop href="{{ route('admin.edit.user', $user->id) }}"
-                                                    class="text-blue-600 hover:text-blue-700 focus:outline-hidden focus:text-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                                                    Edit
-                                                </a>
-
+                                                @can('delete', $user)
+                                                    <button wire:click.stop="delete({{ $user->id }})"
+                                                        class="text-red-600 hover:text-red-700 focus:outline-hidden focus:text-red-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                        Delete
+                                                    </button>  
+                                                @endcan
+                                                
+                                                @can('update',$user)
+                                                    <button wire:click.stop="edit({{ $user->id }})"
+                                                        class="text-blue-600 hover:text-blue-700 focus:outline-hidden focus:text-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                        Edit
+                                                    </button>
+                                                @endcan
 
                                             </td>
                                         </tr>

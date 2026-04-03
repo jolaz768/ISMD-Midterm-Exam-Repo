@@ -10,12 +10,20 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * The policy mappings for the application.
+     *
+     * @var array<class-string, class-string>
+     */
+    protected $policies = [
+        User::class => UserPolicy::class,
+    ];
+
+    /**
      * Register any application services.
      */
     public function register(): void
     {
         //
-        Gate::policy(User::class, UserPolicy::class);
     }
 
     /**
@@ -23,15 +31,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register the UserPolicy for the User model
+        Gate::policy(User::class, UserPolicy::class);
+
         // Allow admin to bypass policy checks globally (faster and simpler)
-        Gate::before(function (User $user, string $ability, $model = null) {
+        Gate::before(function (User $user) {
             if ($user->hasRole('admin')) {
                 return true;
             }
-
-            return null;
         });
 
-       
+        // Use UserPolicy methods for user model permissions
+        // and avoid custom Gate::define() rules that may conflict with policy behaviour.
+        // (The `before()` method in UserPolicy already grants full access to admin.)
     }
 }
