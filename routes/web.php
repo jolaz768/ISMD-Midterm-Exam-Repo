@@ -9,11 +9,14 @@ use App\Livewire\Pages\Admin\User\EditUser;
 use App\Livewire\Pages\Admin\User\ViewUser;
 use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Pages\Auth\Register;
+use App\Livewire\Pages\Employee\EmpDashboard;
+use App\Livewire\Pages\Employee\User\ViewUserEmployee;
 use App\Livewire\Pages\Owner\OwnerDashboard;
 use App\Livewire\Pages\Owner\User\CreateUser as CreateUserOwner;
 use App\Livewire\Pages\Owner\User\EditUser as EditUserOwner;
 use App\Livewire\Pages\Owner\User\ViewUser as ViewUserOwner;
 use App\Livewire\Pages\Public\IndexPage;
+use App\Livewire\Pagess\Employee\Dashboard as employeeDashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -63,16 +66,13 @@ Route::prefix('owner')
   
 });
 
-Route::prefix('staff')
-->middleware(['auth', 'role:staff'])
+Route::prefix('employee')
+->middleware(['auth', 'role:employee'])
 ->group(function()
 {
-    Route::get('/dashboard',OwnerDashboard::class)->name('owner.dashboard');
+Route::get('/dashboard',EmpDashboard::class)->name('employee.dashboard');    
 
 
-    Route::get('/create-user',CreateUserOwner::class)->name('owner.create.user');
-    Route::get('/view-user',ViewUserOwner::class)->name('owner.view.user');
-    Route::get('/edit-user/{id}',EditUserOwner::class)->name('owner.edit.user');
-  
+Route::get('/view-user',ViewUserEmployee::class)->name('employee.view.user');
 });
 

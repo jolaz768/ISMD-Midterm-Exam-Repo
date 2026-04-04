@@ -20,7 +20,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyRole(['owner', 'staff']); // Check if user has permission to view users
+        return $user->hasAnyRole(['owner', 'employee']); // Check if user has permission to view users
     }
 
     /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->hasAnyRole(['owner', 'staff']); // Allow users to view their own profile
+        return $user->hasAnyRole(['owner', 'employee']); // Allow users to view their own profile
     }
 
     /**
@@ -60,7 +60,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return $user->hasAnyRole(['owner', 'staff']); // Allow users to restore their own profile
+        return $user->hasAnyRole(['owner']); // Allow users to restore their own profile
     }
 
     /**
@@ -68,6 +68,6 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): bool
     {
-        return $user->hasAnyRole(['owner', 'staff']); // Allow users to permanently delete their own profile
+        return $user->hasAnyRole(['owner']); // Allow users to permanently delete their own profile
     }
 }

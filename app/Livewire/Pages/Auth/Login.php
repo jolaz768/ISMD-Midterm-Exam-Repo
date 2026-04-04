@@ -26,8 +26,8 @@ class Login extends Component
                 return redirect()->intended(route('admin.dashboard'));
             }elseif(Auth::user()->hasAnyRole(['owner'])){ {
                 return redirect()->intended(route('owner.dashboard'));
-            }}elseif(Auth::user()->hasRole('staff')){ {
-                return redirect()->intended(route('owner.dashboard'));
+            }}elseif(Auth::user()->hasRole('employee')){ {
+                return redirect()->intended(route('employee.dashboard'));
             }}else{
                 return redirect()->intended(route('login.page'));
             }

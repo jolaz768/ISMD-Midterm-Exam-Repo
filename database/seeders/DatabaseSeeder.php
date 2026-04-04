@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $user->assignRole('admin');
 
         Role::firstOrCreate(['name' => 'owner']);
+        Role::firstOrCreate(['name' => 'employee']);
 
         // Create owner user
         $user = User::factory()->create([
@@ -41,16 +42,16 @@ class DatabaseSeeder extends Seeder
         // Assign role
         $user->assignRole('owner');
 
-        Role::firstOrCreate(['name' => 'staff']);
+        Role::firstOrCreate(['name' => 'employee']);
 
         $user = User::factory()->create([
-            'name' => 'staff',
-            'email' => 'staff@gmail.com',
+            'name' => 'employee',
+            'email' => 'employee@gmail.com',
             'password' => bcrypt('password123'),
         ]);
 
         // Assign role
-        $user->assignRole('staff');
+        $user->assignRole('employee');
 
         
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserMiddleware
+class OwnerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,16 +16,15 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
+         $user = Auth::user();
 
-            if (!$user) {
-                return redirect()->route('login.page');
-            }
+        if (!$user) {
+            return redirect()->route('login.page');
+        }
 
-            if (!$user || !$user->hasAnyRole(['admin', 'owner', 'staff'])) {
-                abort(403, 'Unauthorized');
-            }
-
+        if ($user->hasRole('owner')) {
+            abort(403, 'Unauthorized');
+        }
         return $next($request);
     }
 }

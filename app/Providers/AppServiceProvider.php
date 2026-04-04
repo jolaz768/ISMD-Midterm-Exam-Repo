@@ -41,8 +41,6 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
-        // Use UserPolicy methods for user model permissions
-        // and avoid custom Gate::define() rules that may conflict with policy behaviour.
-        // (The `before()` method in UserPolicy already grants full access to admin.)
+        
     }
 }

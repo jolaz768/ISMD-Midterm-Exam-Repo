@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Livewire\Pages\Admin\User;
+namespace App\Livewire\Pages\Employee\User;
 
 use App\Models\User;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-class ViewUser extends Component
+class ViewUserEmployee extends Component
 {
-     //database fields
     public $user;
     public $role;
 
@@ -22,6 +21,9 @@ class ViewUser extends Component
         return User::query()
         ->select('id','name','email','created_at')
         ->with('roles:id,name')
+        ->whereHas('roles', function ($query) {
+            $query->where('name', '!=', 'Admin');
+        })
         ->orderBy('created_at', 'desc')
         ->get();
         // this should show all the users with their roles in the view
@@ -36,10 +38,9 @@ class ViewUser extends Component
 
 
 
-    #[Layout('components.layouts.admin')]
-    
+    #[Layout('components.layouts.employee')]
     public function render()
     {
-        return view('livewire.pages.admin.user.view-user');
+        return view('livewire.pages.employee.user.view-user-employee');
     }
 }

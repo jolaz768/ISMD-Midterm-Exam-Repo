@@ -38,11 +38,6 @@ class ViewUser extends Component
         // this will delete the user from the database
     }
 
-    // public function edit($id)
-    // {
-    //     return redirect()->route('owner.edit.user', $id);
-    // }
-
     #[Layout('components.layouts.owner')]
 
     public function render()
