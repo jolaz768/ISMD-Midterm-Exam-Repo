@@ -17,46 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         Role::firstOrCreate(['name' => 'admin']);
-
-        // Create admin user
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('password123'),
-        ]);
-
-        // Assign role
-        $user->assignRole('admin');
-
-        Role::firstOrCreate(['name' => 'owner']);
-        Role::firstOrCreate(['name' => 'employee']);
-
-        // Create owner user
-        $user = User::factory()->create([
-            'name' => 'owner',
-            'email' => 'owner@gmail.com',
-            'password' => bcrypt('password123'),
-        ]);
-
-        // Assign role
-        $user->assignRole('owner');
-
-        Role::firstOrCreate(['name' => 'employee']);
-
-        $user = User::factory()->create([
-            'name' => 'employee',
-            'email' => 'employee@gmail.com',
-            'password' => bcrypt('password123'),
-        ]);
-
-        // Assign role
-        $user->assignRole('employee');
-
+    
         
-
         $this->call([
             PermissionSeeder::class,
+            RolePermissionSeeder::class,
         ]);
     }
 }
