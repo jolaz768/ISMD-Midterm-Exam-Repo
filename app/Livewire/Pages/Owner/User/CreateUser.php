@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Owner\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -77,11 +78,12 @@ class CreateUser extends Component
         $name = Str::of($this->name)->trim()->title();
         $email = Str::of($this->email)->trim()->lower();
 
-        //create user
+        //create user and assign the same tenant as the current owner
         $user = User::create([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($this->password),
+            'tenant_id' => Auth::user()->tenant_id,
         ]);
 
         //sync roles

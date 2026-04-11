@@ -16,7 +16,6 @@ use App\Livewire\Pages\Owner\User\CreateUser as CreateUserOwner;
 use App\Livewire\Pages\Owner\User\EditUser as EditUserOwner;
 use App\Livewire\Pages\Owner\User\ViewUser as ViewUserOwner;
 use App\Livewire\Pages\Public\IndexPage;
-use App\Livewire\Pagess\Employee\Dashboard as employeeDashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

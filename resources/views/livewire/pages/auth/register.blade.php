@@ -68,36 +68,6 @@
             @enderror
           </div>
 
-          <div class="mt-5">
-            <h2 class="mb-1 text-lg font-semibold text-gray-800 dark:text-neutral-200">
-              Assign Role
-            </h2>
-
-          </div>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-2">
-            @forelse ($this->roles as $rKey => $role)
-
-              <label wire:key="role-{{ $role->id }}" for="hs-checkbox-in-form-{{ $role->id }}"
-                class="flex items-center p-3 w-full bg-layer border dark:border-neutral-700 border-layer-line rounded-lg text-sm focus:border-primary-focus focus:ring-primary-focus">
-                <input type="radio" name="selectedRole" id="hs-checkbox-in-form-{{ $role->id }}"
-                  wire:model.defer="selectedRole" value="{{ $role->name }}"
-                  class="h-4 w-4 border-gray-300 rounded text-blue-600 focus:ring-blue-500">
-                <span class="text-sm ms-3 text-muted-foreground-1 dark:text-amber-50">
-                  {{ str_replace('_', ' ', $role->name) }}
-                </span>
-
-              </label>
-            @empty
-              <p>No Roles Found</p>
-            @endforelse
-
-            @error('selectedRole')
-              <div>
-                <span class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</span>
-              </div>
-            @enderror
-          </div>
-
           <div class="mt-6 grid">
             <button type="submit"
               class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none">Submit</button>

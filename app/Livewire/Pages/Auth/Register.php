@@ -15,35 +15,49 @@ class Register extends Component
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
-    public string $selectedRole = '';
 
-    public $roles = [];
 
-    public function mount()
+  
+    public function rule()
     {
-        $this->roles = Role::select('id', 'name')
-            ->whereIn('name', ['owner', 'employee '])
-            ->get();
+        return [
+            'name' => 'required|min:2|max:60',
+            'email' => 'required|email:rfc,dns|unique:users',
+            'password' => 'required|min:8|confirmed',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Name is required',
+            'name.min' => 'Name must be at least 2 characters',
+            'name.max' => 'Name must be at most 60 characters',
+            'email.required' => 'Email is required',
+            'email.email' => 'Email is invalid',
+            'email.unique' => 'Email already exists',
+            'password.required' => 'Password is required',
+            'password.confirmed' => 'Password does not match',
+        ];
     }
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users,email',
-        'password' => 'required|string|min:8|confirmed',
-        'selectedRole' => 'required|in:owner,employee',
-    ];
-
     public function register()
-    {
-        $this->validate();
+    {        
+        $this->validate($this->rule(), $this->messages());
+        
+        $this->password = bcrypt($this->password);
+        $this->name = ucwords($this->name);
+        $this->email = strtolower($this->email);
 
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password,
         ]);
+        $user->tenant_id = $user->id;
+        
+        $user->save();
 
-        $user->assignRole($this->selectedRole);
+        $user->assignRole('owner');
 
         Auth::login($user);
 
@@ -54,6 +68,7 @@ class Register extends Component
         } else {
             return redirect()->route('login.page');
         }
+        
     }
     public function render()
     {

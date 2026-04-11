@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Employee\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -18,22 +19,38 @@ class ViewUserEmployee extends Component
     //get all users with their roles
     public function users()
     {
-        return User::query()
-        ->select('id','name','email','created_at')
-        ->with('roles:id,name')
-        ->whereHas('roles', function ($query) {
-            $query->where('name', '!=', 'Admin');
+        $user = Auth::user();
+        $user = Auth::user();
+
+    return User::query()
+        ->when($user->hasRole('employee'), function ($query) use ($user) {
+         
+            $query->where('id', $user->id);
         })
+        ->when($user->hasRole('owner'), function ($query) use ($user) {
+        
+            $query->where('tenant_id', $user->tenant_id)
+                ->where('id', '!=', $user->id)
+                ->whereDoesntHave('roles', function ($q) {
+                    $q->where('name', 'Admin');
+                });
+        })
+        ->with('roles:id,name')
         ->orderBy('created_at', 'desc')
         ->get();
-        // this should show all the users with their roles in the view
     }
 
     public function delete($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::where('id', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->firstOrFail();
         $user->delete();
-        // this will delete the user from the database
+    }
+
+    public function edit($id)
+    {
+        return redirect()->route('owner.edit.user', ['id' => $id]);
     }
 
 

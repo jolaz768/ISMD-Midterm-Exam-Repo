@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Pages\Owner\User;
 
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
@@ -95,13 +95,12 @@ class EditUser extends Component
         ]);
 
         //assign roles
-        $user = User::find($this->userId);
         $user->syncRoles($selectedRole);
 
-        return redirect()->route('admin.view.user')->with('success', 'User updated successfully.');
-        //this should redirect back to the view page
+        return redirect()->route('owner.view.user')->with('success', 'User updated successfully.');
+        //this should redirect back to the owner user list page
     }
-    #[Layout('components.layouts.admin')]
+    #[Layout('components.layouts.owner')]
     public function render()
     {
         return view('livewire.pages.owner.user.edit-user');

@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Owner\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -21,21 +22,27 @@ class ViewUser extends Component
     public function users()
     {
         return User::query()
-        ->select('id','name','email','created_at')
-        ->with('roles:id,name')
-        ->whereHas('roles', function ($query) {
-            $query->where('name', '!=', 'Admin');
-        })
-        ->orderBy('created_at', 'desc')
-        ->get();
-        // this should show all the users with their roles in the view
+            ->where('tenant_id', Auth::user()->tenant_id)
+            // ->where('id', '!=', Auth::id())  //e  hide  ya  ang iya self
+            ->with('roles:id,name')
+            ->whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'Admin');
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function delete($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::where('id', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->firstOrFail();
         $user->delete();
-        // this will delete the user from the database
+    }
+
+    public function edit($id)
+    {
+        return redirect()->route('owner.edit.user', ['id' => $id]);
     }
 
     #[Layout('components.layouts.owner')]
