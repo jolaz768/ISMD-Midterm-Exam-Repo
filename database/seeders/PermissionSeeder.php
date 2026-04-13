@@ -13,10 +13,12 @@ class PermissionSeeder extends Seeder
         'create users',
         'update users',
         'delete users',
+
         'view roles',
         'create roles',
         'update roles',
         'delete roles',
+        
         'view permissions',
         'create permissions',
         'update permissions',

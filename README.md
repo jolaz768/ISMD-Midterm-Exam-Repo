@@ -18,35 +18,31 @@
 git clone <repository-url>
     
     
-    step need to  follow on howto set up this system 
+step need to  follow on how to set up this system 
 
-    1st step: copy  the codein the repo.
-    2nd step: clone it tin the VS Studio and locate it in drivec/laragon/www
-    3rd step: bash command  composer intall, to fix the error in the code.
-    if thier is error like this In Filesystem.php line 
-    913:                
-    file_put_contents(C:/laragon/www/ISMD-Midterm-Exam-Repo/vendor/composer/installed.php): Failed to open stream: Resource temporarily unavailable  
-    bash composer update  in the terminal
+Step 1: Copy the source code from the repository.
 
-    4th step: set up env
-    bash  the following command
-    copy  .env.example .env to copy the  env.example  for env  file
+Step 2: Clone the project using VS Code and place it in the directory (C:/laragon/www.) This ensures it runs properly in your local Laragon environment.
 
-    5th step:  run  migration  and   seeder by bash a 
+Step 3: Open the terminal and run the command (composer install) to install all required dependencies. If you encounter an error like:
+“file_put_contents… Failed to open stream: Resource temporarily unavailable”, fix it by running (composer update) in the terminal.
 
-    command php  artisan migrate --seed and type  yes
-    and bash   php artisan key:generate
+Step 4: Set up the environment file by running the command (copy .env.example .env) This will create your .env configuration file.
 
-    6th step:  installing preline by  bash the command  npm i preline  or npm install preline  and npm run  build  to generate the ui.
+Step 5: Run the database migration and seeder using the command  (php artisan migrate --seed), then type yes if prompted. After that, generate the application key by running php artisan key:generate.
 
-    7th step: serving tothe local  host   by running hte command  php artisan serve.
+Step 6: Install the UI dependencies by running (npm install preline or npm i preline). Then execute (npm run build) to compile and generate the frontend UI assets.
 
-    9th step:  you can access the admin dashboard   by the default email  and  password
+Step 7: Start the local development server by running (php artisan serve). This will host your application on a local URL.
 
-    email:admin@gmail.com
-    password:password123
+Step 8: Access the system through your browser using the provided local server link (e.g., http://127.0.0.1:8000).
 
-    step:10 register user and thier is a default role as a owner and add employee.
+Step 9: Log in to the admin dashboard using the default credentials:
+
+Email: admin@gmail.com
+Password: password123
+
+10th step: To access the Owner Dashboard, a user must first register an account through the registration page. After successful registration, the user can log in and will be granted access to the owner dashboard. For employees, accounts are created by the owner, as they are not allowed to self-register. Once the owner has created an employee account, the employee can log in using their assigned credentials and access the system based on their roles and permissions.
 
 
     
