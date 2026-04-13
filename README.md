@@ -37,12 +37,20 @@ Step 7: Start the local development server by running (php artisan serve). This 
 
 Step 8: Access the system through your browser using the provided local server link (e.g., http://127.0.0.1:8000).
 
-Step 9: Log in to the admin dashboard using the default credentials:
+Step 9: Log in to the admin/owner/employee dashboard using the default credentials:
 
+test  account
+for admin
 Email: admin@gmail.com
 Password: password123
 
-10th step: To access the Owner Dashboard, a user must first register an account through the registration page. After successful registration, the user can log in and will be granted access to the owner dashboard. For employees, accounts are created by the owner, as they are not allowed to self-register. Once the owner has created an employee account, the employee can log in using their assigned credentials and access the system based on their roles and permissions.
+for owner
+Email: owner@gmail.com
+Password: password123
+
+for employee
+Email: employee@gmail.com
+Password: password123
 
 
     

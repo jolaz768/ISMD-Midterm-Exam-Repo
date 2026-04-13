@@ -1,6 +1,9 @@
 <?php
 
 use App\Livewire\Pages\Admin\AdminDashboard;
+use App\Livewire\Pages\Admin\Permission\CreatePermission;
+use App\Livewire\Pages\Admin\Permission\EditPermission;
+use App\Livewire\Pages\Admin\Permission\ViewPermission;
 use App\Livewire\Pages\Admin\Role\CreateRole;
 use App\Livewire\Pages\Admin\Role\EditRole;
 use App\Livewire\Pages\Admin\Role\ViewRole;
@@ -48,6 +51,10 @@ Route::prefix('admin')
     Route::get('/create-user',CreateUser::class)->name('admin.create.user');
     Route::get('/view-user',ViewUser::class)->name('admin.view.user');
     Route::get('/edit-user/{id}',EditUser::class)->name('admin.edit.user');
+
+    Route::get('/create-permission',CreatePermission::class)->name('admin.create.permission');
+    Route::get('/view-permission',ViewPermission::class)->name('admin.view.permission');
+    Route::get('/edit-permission/{id}',EditPermission::class)->name('admin.edit.permission');
 
   
 });

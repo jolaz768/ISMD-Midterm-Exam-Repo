@@ -41,6 +41,54 @@ class DatabaseSeeder extends Seeder
 
         // Assign role to user
         $user->assignRole($role);
+
+    
+        $role = Role::firstOrCreate(['name' => 'owner']);
+
+        // Get all permissions
+        $permissions = Permission::wherein('name', 
+        ['view users', 'create users', 'update users', 'delete users'])->get(); //[
+           
+
+        // Assign all permissions to admin role
+        $role->syncPermissions($permissions);
+
+        // Create Admin User
+        $user = User::firstOrCreate(
+            ['email' => 'owner@gmail.com'],
+            [
+                'name' => 'owner',
+                'password' => Hash::make('password123'),
+                'tenant_id' => 1
+            ]
+        );
+
+        // Assign role to user
+        $user->assignRole($role);
+
+
+                $role = Role::firstOrCreate(['name' => 'employee']);
+
+        // Get all permissions
+        $permissions = Permission::wherein('name', 
+        ['view users'])->get(); //[
+           
+
+        // Assign all permissions to admin role
+        $role->syncPermissions($permissions);
+
+        // Create Admin User
+        $user = User::firstOrCreate(
+            ['email' => 'employee@gmail.com'],
+            [
+                'name' => 'employee',
+                'password' => Hash::make('password123'),
+                'tenant_id' => 1
+            ]
+        );
+
+        // Assign role to user
+        $user->assignRole($role);
         
         $this->call([
             PermissionSeeder::class,

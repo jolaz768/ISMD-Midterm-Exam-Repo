@@ -503,6 +503,25 @@ lg:block lg:-translate-x-full lg:end-auto lg:bottom-0" role="dialog" tabindex="-
                 <!-- End List -->
             </div>
 
+             <div
+                class="pt-3 mt-3 flex flex-col border-t border-sidebar-2-divider first:border-t-0 first:pt-0 first:mt-0">
+                <span class="block ps-2.5 mb-2 font-medium text-xs uppercase text-muted-foreground-1">
+                    Permission
+                </span>
+
+                <!-- List -->
+                <ul class="flex flex-col gap-y-1">
+                    <li>
+                        <a class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-sidebar-2-nav-foreground rounded-lg hover:bg-sidebar-2-nav-hover focus:outline-hidden focus:bg-sidebar-2-nav-focus "
+                            href="{{ route('admin.view.permission') }}">
+                            View Permissions
+                        </a>
+                    </li>
+                    
+                </ul>
+                <!-- End List -->
+            </div>
+
             <div
                 class="pt-3 mt-3 lg:hidden flex flex-col border-t border-sidebar-2-divider first:border-t-0 first:pt-0 first:mt-0">
                 <span class="block ps-2.5 mb-2 font-medium text-xs uppercase text-muted-foreground-1">

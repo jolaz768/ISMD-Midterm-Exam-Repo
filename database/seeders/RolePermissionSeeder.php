@@ -14,26 +14,26 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-        $permissions = [
-            'view users',
-            'create users',
-            'update users',
-            'delete users',
-            'view roles',
-            'create roles',
-            'update roles',
-            'delete roles',
-            'view permissions',
-            'create permissions',
-            'update permissions',
-            'delete permissions',
+        // app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        // $permissions = [
+        //     'view users',
+        //     'create users',
+        //     'update users',
+        //     'delete users',
+        //     'view roles',
+        //     'create roles',
+        //     'update roles',
+        //     'delete roles',
+        //     'view permissions',
+        //     'create permissions',
+        //     'update permissions',
+        //     'delete permissions',
 
-        ];
+        // ];
 
-        foreach ($permissions as $permission) {
-            \Spatie\Permission\Models\Permission::firstOrCreate(['name' => $permission]);
-        }
+        // foreach ($permissions as $permission) {
+        //     \Spatie\Permission\Models\Permission::firstOrCreate(['name' => $permission]);
+        // }
         
         $admin = Role::firstOrCreate(['name' => 'admin']);
         $admin->givePermissionTo(Permission::all());
