@@ -27,7 +27,7 @@
                                         View all
                                     </a>
 
-                                    @can('create', App\Models\User::class)
+                                    @can('create users', App\Models\User::class)
                                        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                                         href="{{ route('owner.create.user') }}">
                                         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -131,14 +131,14 @@
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-end">
-                                                @can('delete', $user)
+                                                @can('Delete Users', $user)
                                                     <button wire:click.stop="delete({{ $user->id }})"
                                                         class="text-red-600 hover:text-red-700 focus:outline-hidden focus:text-red-700 disabled:opacity-50 disabled:pointer-events-none">
                                                         Delete
                                                     </button>  
                                                 @endcan
                                                 
-                                                @can('update',$user)
+                                                @can('Update users',$user)
                                                     <button wire:click.stop="edit({{ $user->id }})"
                                                         class="text-blue-600 hover:text-blue-700 focus:outline-hidden focus:text-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                                                         Edit
@@ -167,6 +167,8 @@
                                         </td>
                                     </tr>
                                 @endif
+
+
 
 
                             </tbody>

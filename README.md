@@ -29,11 +29,11 @@ Step 3: Open the terminal and run the command (composer install) to install all 
 
 Step 4: Set up the environment file by running the command (copy .env.example .env) This will create your .env configuration file.
 
-Step 5: Run the database migration and seeder using the command  (php artisan migrate --seed), then type yes if prompted. After that, generate the application key by running php artisan key:generate.
+Step 5: Run the database migration and seeder using the command  (php artisan migrate --seed ,if erro intall livewire  (composer require livewire/livewire ~3.0)), then type yes if prompted. After that, generate the application key by running php artisan key:generate.
 
 Step 6: Install the UI dependencies by running (npm install preline or npm i preline). Then execute (npm run build) to compile and generate the frontend UI assets.
 
-Step 7: Start the local development server by running (php artisan serve). This will host your application on a local URL.
+Step 7: Start the local development server by running (php artisan serve if error shop no app encryption key run (php artisan key:generate)). This will host your application on a local URL.
 
 Step 8: Access the system through your browser using the provided local server link (e.g., http://127.0.0.1:8000).
 
